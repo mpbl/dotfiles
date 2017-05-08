@@ -1,0 +1,2 @@
+#!/bin/bash
+find ~/.thumbnails/ -type f -atime +7 -exec rm {} \;
