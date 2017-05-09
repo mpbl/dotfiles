@@ -44,16 +44,3 @@ complete -o "nospace" -W "firefox sl" killall;
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
-
-# todo merge below
-alias tp='ping -c 3 www.gentoo.org'
-alias dfh='df -h ~'
-alias t='tree -d'
-
-# source ros environment
-if [ -f ~/catkin_ws/devel/setup.bash ]; then
-    source ~/catkin_ws/devel/setup.bash
-fi
-
-export PRINTER=MFC7460DN
-
