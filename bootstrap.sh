@@ -7,9 +7,10 @@ git pull origin master;
 function copy_to_home() {
     rsync --exclude ".git/" \
         --exclude "bootstrap.sh" \
+        --exclude ".gitconfig" \
         --exclude "README.md" \
         -avh --no-perms . ~;
-    source ~/.bash_profile;
+    source ~/.bashrc;
 }
 
 if [ "$1" == "--force" -o "$1" == "-f" ]; then
