@@ -5,9 +5,14 @@ cd "$(dirname "${BASH_SOURCE}")";
 git pull origin master;
 
 function copy_to_home() {
+    # never overwrite existing .gitconfig
+    if [ ! -f ~/.gitconfig ]; then
+        cp .gitconfig ~/.gitconfig
+    fi
     rsync --exclude ".git/" \
         --exclude "bootstrap.sh" \
         --exclude ".gitconfig" \
+        --exclude "install_packages.sh" \
         --exclude "README.md" \
         -avh --no-perms . ~;
     source ~/.bashrc;

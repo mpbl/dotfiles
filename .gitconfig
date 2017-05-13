@@ -1,3 +1,6 @@
+[user]
+    name = John Doe
+    email = john.doe@domain.com
 [credential]
     # for linux only
     helper = store
