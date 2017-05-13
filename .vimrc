@@ -44,9 +44,9 @@
     scriptencoding utf-8
 
     " Always switch to the current file directory
-    "augroup switchWD
-    "autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | lcd %:p:h | endif
-    "augroup END
+    augroup switchWD
+        autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | lcd %:p:h | endif
+    augroup END
 
     " Instead of reverting the cursor to the last position in the buffer, we
     " set it to the first line when editing a git commit message
@@ -469,9 +469,9 @@
             let g:clang_format#detect_style_file = 1
 
             augroup clangFMT
-            autocmd FileType cpp nnoremap <buffer><leader>r :<C-u>ClangFormat<CR>
-            autocmd FileType cpp vnoremap <buffer><leader>r :ClangFormat<CR>
-            "autocmd FileType cpp let g:clang_format#auto_format = 1
+                autocmd FileType cpp nnoremap <buffer><leader>r :<C-u>ClangFormat<CR>
+                autocmd FileType cpp vnoremap <buffer><leader>r :ClangFormat<CR>
+                autocmd FileType cpp let g:clang_format#auto_format = 1
             augroup END
 
         endif

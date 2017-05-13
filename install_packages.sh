@@ -9,6 +9,7 @@ cmake
 build-essential
 curl
 rsync
+clang-format
 )
 
 sudo apt update
