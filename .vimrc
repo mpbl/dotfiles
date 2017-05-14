@@ -460,6 +460,9 @@
                 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
             augroup END
 
+            " python semantic completion
+            let g:ycm_python_binary_path = '/usr/bin/python3'
+
             " Disable the neosnippet preview candidate window
             " When enabled, there can be too much visual noise
             " especially when splits are used.

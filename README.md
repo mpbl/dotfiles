@@ -45,6 +45,21 @@ This script will install some command line tools I find useful (using apt instal
 ./install_packages.sh
 ```
 
+### Start vim
+
+When you start vim for the first time, plug.vim and ubuntu mono powerline fonts will be installed.
+Once that is finished, run:
+```vim
+:PlugInstall
+```
+to install the remaining plugins.
+
+To install YouCompleteMe with semantic support for C, run:
+```bash
+cd .vim/plugged/youcompleteme
+./install.py --clang-completer
+```
+
 ## Feedback
 
 If you have suggestions/improvements
