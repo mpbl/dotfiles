@@ -10,6 +10,8 @@ build-essential
 curl
 rsync
 clang-format
+python-dev
+python3-dev
 )
 
 sudo apt update
