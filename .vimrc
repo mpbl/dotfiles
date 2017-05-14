@@ -15,8 +15,9 @@
 
     " Install vim-plug if we don't already have it
     if empty(glob("~/.vim/autoload/plug.vim"))
-        execute 'mkdir -p ~/.vim/autoload'
-        execute 'mkdir -p ~/.vim/plugged'
+        echo 'Installing plug.vim..'
+        silent !mkdir -p ~/.vim/autoload
+        silent !mkdir -p ~/.vim/plugged
         execute '!curl -fLo ~/.vim/autoload/plug.vim https://raw.github.com/junegunn/vim-plug/master/plug.vim'
     endif
 
