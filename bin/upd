@@ -2,5 +2,7 @@
 sudo apt autoremove
 sudo apt clean
 sudo apt update && \
+echo ======== && \
 echo UPGRADE: && \
+echo ======== && \
 sudo apt upgrade
