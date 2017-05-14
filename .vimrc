@@ -15,10 +15,21 @@
 
     " Install vim-plug if we don't already have it
     if empty(glob("~/.vim/autoload/plug.vim"))
-        echo 'Installing plug.vim..'
+        echo "Installing plug.vim..\n"
         silent !mkdir -p ~/.vim/autoload
         silent !mkdir -p ~/.vim/plugged
-        execute '!curl -fLo ~/.vim/autoload/plug.vim https://raw.github.com/junegunn/vim-plug/master/plug.vim'
+        execute 'silent !curl -fLo ~/.vim/autoload/plug.vim https://raw.github.com/junegunn/vim-plug/master/plug.vim'
+    endif
+
+    " Install powerline fonts if we don't already have it
+    if empty(glob("~/.fonts/ubuntu-mono-powerline-ttf"))
+        echo "Installing powerline fonts..\n"
+        silent !mkdir -p ~/.fonts/ubuntu-mono-powerline-ttf
+        execute 'silent !wget -q -P ~/.fonts/ubuntu-mono-powerline-ttf/ "https://raw.githubusercontent.com/powerline/fonts/master/UbuntuMono/Ubuntu Mono derivative Powerline Bold Italic.ttf"'
+        execute 'silent !wget -q -P ~/.fonts/ubuntu-mono-powerline-ttf/ "https://raw.githubusercontent.com/powerline/fonts/master/UbuntuMono/Ubuntu Mono derivative Powerline Bold.ttf"'
+        execute 'silent !wget -q -P ~/.fonts/ubuntu-mono-powerline-ttf/ "https://raw.githubusercontent.com/powerline/fonts/master/UbuntuMono/Ubuntu Mono derivative Powerline Italic.ttf"'
+        execute 'silent !wget -q -P ~/.fonts/ubuntu-mono-powerline-ttf/ "https://raw.githubusercontent.com/powerline/fonts/master/UbuntuMono/Ubuntu Mono derivative Powerline.ttf"'
+        execute 'silent !fc-cache -vf'
     endif
 
     if filereadable(expand("~/.vim/autoload/plug.vim"))
