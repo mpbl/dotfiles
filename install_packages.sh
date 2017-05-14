@@ -7,6 +7,7 @@ git
 tree
 cmake
 build-essential
+exuberant-ctags
 curl
 rsync
 clang-format
