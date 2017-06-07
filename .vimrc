@@ -40,7 +40,6 @@
         Plug 'vim-airline/vim-airline' "| Plug 'powerline/fonts'
         Plug 'vim-airline/vim-airline-themes'
         Plug 'easymotion/vim-easymotion'
-        Plug 'ervandew/supertab'
         Plug 'ctrlpvim/ctrlp.vim'
         Plug 'scrooloose/nerdcommenter'
         Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
@@ -442,12 +441,14 @@
 
     " YouCompleteMe {
         if isdirectory(expand("~/.vim/plugged/youcompleteme/"))
-            let g:acp_enableAtStartup = 0
+            "let g:acp_enableAtStartup = 0
 
-            " enable completion from tags
+            " self explanatory af
             let g:ycm_collect_identifiers_from_tags_files = 1
+            let g:ycm_autoclose_preview_window_after_completion = 1
 
             " remap Ultisnips for compatibility for YCM
+            let g:ycm_use_ultisnips_completer = 1
             let g:UltiSnipsExpandTrigger = '<C-j>'
             let g:UltiSnipsJumpForwardTrigger = '<C-j>'
             let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
@@ -463,6 +464,11 @@
             " python semantic completion
             let g:ycm_python_binary_path = '/usr/bin/python3'
 
+            " c lang family completion
+            let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
+            let g:ycm_confirm_extra_conf = 1
+
+            noremap <leader>j :YcmCompleter GoTo<CR>
             " Disable the neosnippet preview candidate window
             " When enabled, there can be too much visual noise
             " especially when splits are used.
@@ -501,6 +507,23 @@
                 autocmd FileType cpp let g:clang_format#auto_format = 1
             augroup END
 
+        endif
+    " }
+
+    " jedi-vim {
+        if isdirectory(expand("~/.vim/plugged/jedi-vim/"))
+            let g:jedi#auto_vim_configuration = 0
+            let g:jedi#popup_on_dot = 0
+            let g:jedi#popup_select_first = 0
+            let g:jedi#completions_enabled = 0
+            let g:jedi#completions_command = ""
+            let g:jedi#show_call_signatures = "1"
+
+            let g:jedi#goto_assignments_command = "<leader>pa"
+            let g:jedi#goto_definitions_command = "<leader>pd"
+            let g:jedi#documentation_command = "<leader>pk"
+            let g:jedi#usages_command = "<leader>pu"
+            let g:jedi#rename_command = "<leader>pr"
         endif
     " }
 " }
