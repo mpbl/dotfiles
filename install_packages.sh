@@ -2,17 +2,20 @@
 # install some basic command line utilities using apt
 
 packages=(
-vim
-git
-tree
-cmake
 build-essential
-exuberant-ctags
-curl
-rsync
 clang-format
+cmake
+curl
+exuberant-ctags
+git
 python-dev
 python3-dev
+rsync
+tmux
+tmux
+tree
+vim
+xsel
 )
 
 sudo apt update

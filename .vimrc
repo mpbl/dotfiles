@@ -50,6 +50,7 @@
         Plug 'valloric/youcompleteme'
         Plug 'majutsushi/tagbar'
         Plug 'rhysd/vim-clang-format', { 'for': 'cpp' }
+        Plug 'christoomey/vim-tmux-navigator'
         " Rainbow
 
         call plug#end()
@@ -145,6 +146,9 @@
         let g:solarized_visibility="normal"
         color solarized             " Load a colorscheme
     endif
+
+    " colors for vimdiff
+    highlight DiffText cterm=none ctermfg=White ctermbg=Red gui=none guifg=White guibg=Red
 
 " }
 
@@ -453,6 +457,8 @@
             let g:UltiSnipsJumpForwardTrigger = '<C-j>'
             let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
 
+            let g:ycm_show_diagnostics_ui = 0
+
             " Enable omni completion.
             augroup omniCOMPLETE
                 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
@@ -581,4 +587,10 @@
     command! -complete=file -nargs=+ Shell call s:RunShellCommand(<q-args>)
     " e.g. Grep current file for <search_term>: Shell grep -Hn <search_term> %
     " }
+" }
+
+" Use local vimrc if available {
+    if filereadable(expand("~/.vimrc.local"))
+        source ~/.vimrc.local
+    endif
 " }
