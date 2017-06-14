@@ -23,18 +23,15 @@
     # List contributors with number of commits
     contributors = shortlog --summary --numbered
 [branch]
-    #autosetuprebase = always
-[apply]
-    # Detect whitespace errors when applying a patch
-    whitespace = fix
+    # imply tracking
+    autosetupmerge = always
+    # pull --rebase default
+    autosetuprebase = always
+[push]
+    default = matching
 [core]
     eol = native
-    autocrlf = input
     excludesfile = ~/.gitignore
-    whitespace = blank-at-eol,blank-at-eof,space-before-tab,trailing-space,tab-indent
-    safecrlf = false
-[push]
-    default = simple
 [color]
     ui = auto
 [color "branch"]
@@ -51,8 +48,6 @@
     changed = red
     untracked = cyan
 [diff]
-    # Detect copies as well as renames
-    #renames = copies
     indentHeuristic = true
     compactionHeuristic = true
 [diff "bin"]
@@ -64,6 +59,7 @@
 [init]
     templatedir = ~/.git_template
 [user]
+    # force user config on a per repo basis if no global user config
     useconfigonly = true
 
 # vim: sw=4 ts=4 et filetype=gitconfig:
