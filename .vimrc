@@ -531,6 +531,34 @@
     command! -complete=file -nargs=+ Shell call s:RunShellCommand(<q-args>)
     " e.g. Grep current file for <search_term>: Shell grep -Hn <search_term> %
     " }
+
+    " Search visual selection {
+        " Search visual selection with * and #
+        " From an idea by Michael Naumann
+        function! VisualSearch(direction) range
+            let l:saved_reg = @"
+            execute "normal! vgvy"
+
+            let l:pattern = escape(@", '\\/.*$^~[]')
+            let l:pattern = substitute(l:pattern, "\n$", "", "")
+
+            if a:direction == 'b'
+                execute "normal ?" . l:pattern . "^M"
+            elseif a:direction == 'gv'
+                call CmdLine("vimgrep " . '/'. l:pattern . '/' . ' **/*.')
+            elseif a:direction == 'f'
+                execute "normal /" . l:pattern . "^M"
+            endif
+
+            let @/ = l:pattern
+            let @" = l:saved_reg
+        endfunction
+
+        " Basically you press * or # to search for the current selection
+        vnoremap <silent> * :call VisualSearch('f')<CR>
+        vnoremap <silent> # :call VisualSearch('b')<CR>
+        vnoremap <silent> gv :call VisualSearch('gv')<CR>
+    " }
 " }
 
 " Use local vimrc if available {
