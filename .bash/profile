@@ -1,5 +1,10 @@
+#!/usr/bin/env bash
+
 # Set bash to vi - Mode
 set -o vi
+
+# disable software flow control
+stty -ixon
 
 # Add `~/bin` to the `$PATH`
 export PATH="$HOME/bin:$PATH"
