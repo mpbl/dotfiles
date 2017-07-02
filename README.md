@@ -30,7 +30,7 @@ directory, so you should make a backup.
 The following files are reserved for your private local configuration:
  - `~/.gitconfig`
  - `~/.vimrc.local`
- - `~/.gitconfig`
+ - `~/.bashrc.local`
 
 If they don't exist, an initial version will be set up.
 Subsequent calls to the bootstrap won't overwrite these files.
