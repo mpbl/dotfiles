@@ -13,6 +13,8 @@
 
 " Plugins {
 
+    " First Time Only Installs {
+
     " Install vim-plug if we don't already have it
     if empty(glob("~/.vim/autoload/plug.vim"))
         echo "Installing plug.vim..\n"
@@ -32,25 +34,25 @@
         execute 'silent !fc-cache -vf'
     endif
 
+    " }
+
     if filereadable(expand("~/.vim/autoload/plug.vim"))
         call plug#begin('~/.vim/plugged')
 
-        Plug 'altercation/vim-colors-solarized'
-        Plug 'vim-airline/vim-airline' "| Plug 'powerline/fonts'
-        Plug 'vim-airline/vim-airline-themes'
-        Plug 'easymotion/vim-easymotion'
-        Plug 'ctrlpvim/ctrlp.vim'
-        Plug 'scrooloose/nerdcommenter'
-        Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-        Plug 'sirver/ultisnips' | Plug 'honza/vim-snippets'
-        Plug 'tpope/vim-fugitive'
-        Plug 'tpope/vim-repeat'
-        Plug 'tpope/vim-surround'
-        Plug 'valloric/youcompleteme'
-        Plug 'majutsushi/tagbar'
-        Plug 'rhysd/vim-clang-format', { 'for': 'cpp' }
-        Plug 'christoomey/vim-tmux-navigator'
-        " Rainbow
+        Plug 'altercation/vim-colors-solarized' " Colorscheme
+        Plug 'christoomey/vim-tmux-navigator'   " Seamless vim and tmux split navigation
+        Plug 'ctrlpvim/ctrlp.vim'               " Fuzzy file opener
+        Plug 'easymotion/vim-easymotion'        " Speed of light motion
+        Plug 'majutsushi/tagbar'                " Tags in sidebar
+        Plug 'rhysd/vim-clang-format', { 'for': 'cpp' }         " c++ formatting
+        Plug 'scrooloose/nerdcommenter'                         " Code commenting
+        Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }  " File browser sidebar
+        Plug 'sirver/ultisnips' | Plug 'honza/vim-snippets'     " Code snippets
+        Plug 'tpope/vim-fugitive'                               " Git in Vim!!
+        Plug 'tpope/vim-surround' | Plug 'tpope/vim-repeat'     " Repeatable surrounding commands
+        Plug 'valloric/youcompleteme'           " Code completion engine!!
+        Plug 'vim-airline/vim-airline'          " Statusline
+        Plug 'vim-airline/vim-airline-themes'   " Solarized theme for airline
 
         call plug#end()
     endif
