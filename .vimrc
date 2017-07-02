@@ -44,6 +44,7 @@
         Plug 'ctrlpvim/ctrlp.vim'               " Fuzzy file opener
         Plug 'easymotion/vim-easymotion'        " Speed of light motion
         Plug 'majutsushi/tagbar'                " Tags in sidebar
+        Plug 'mbbill/undotree'                  " Undo sidebar
         Plug 'rhysd/vim-clang-format', { 'for': 'cpp' }         " c++ formatting
         Plug 'scrooloose/nerdcommenter'                         " Code commenting
         Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }  " File browser sidebar
