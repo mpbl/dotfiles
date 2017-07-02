@@ -9,6 +9,7 @@
     df = diff
     dfc = diff --cached
     l = log --branches --remotes --tags --graph --oneline --decorate --max-count=15
+    rh = reset --hard
     st = status
     who = log --pretty=format:'%w(120, 0, 38)%C(yellow)%h%Creset %C(green)%<(15,trunc)%an%Creset %C(cyan)%<(12,trunc)%cr%Creset %C(red)%d%Creset %s'  --all --max-count=15
 
