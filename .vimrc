@@ -203,8 +203,8 @@
     noremap k gk
 
     " tab movement
-    map <S-H> gT
-    map <S-L> gt
+    noremap <S-H> gT
+    noremap <S-L> gt
 
     " Yank from the cursor to the end of the line, to be consistent with C and D.
     nnoremap Y y$
@@ -235,18 +235,24 @@
     cmap w!! w !sudo tee % >/dev/null
 
     " Adjust viewports to the same size
-    map <Leader>= <C-w>=
+    nnoremap <Leader>= <C-w>=
 
     " Map <Leader>ff to display all lines with keyword under cursor
     " and ask which one to jump to
     "nmap <Leader>ff [I:let nr = input("Which one: ")<Bar>exe "normal " . nr ."[\t"<CR>
 
     " Easier horizontal scrolling
-    map zl zL
-    map zh zH
+    nnoremap zl zL
+    nnoremap zh zH
 
     " Easier formatting
-    nnoremap <silent> <leader>q gwip
+    "nnoremap <silent> <leader>q gwip
+
+    " Open  quickfix window
+    nnoremap <silent> <leader>q :copen<CR>
+    " Clear  quickfix window
+    nnoremap <silent> <leader>cq :cexpr []<CR>
+
 " }
 
 " Plugin Settings/Mappings {
