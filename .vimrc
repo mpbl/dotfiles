@@ -35,7 +35,6 @@
     if filereadable(expand("~/.vim/autoload/plug.vim"))
         call plug#begin('~/.vim/plugged')
 
-        " Plug 'scrooloose/syntastic' todo configure for pylint and clang
         Plug 'altercation/vim-colors-solarized'
         Plug 'vim-airline/vim-airline' "| Plug 'powerline/fonts'
         Plug 'vim-airline/vim-airline-themes'
@@ -133,7 +132,7 @@
     set list                        " Show “invisible” characters
     set listchars=tab:▸\ ,trail:•,extends:#,nbsp:.
     "set ttyfast                     " Optimize for fast terminal connections
-    "set encoding=utf-8 nobomb       " Use UTF-8 without BOM
+    set encoding=utf-8 nobomb       " Use UTF-8 without BOM
 
 " }
 
@@ -168,6 +167,7 @@
     augroup stripWHITESPACE
         autocmd FileType c,cpp,python,xml,yml autocmd BufWritePre <buffer> call StripTrailingWhitespace()
     augroup END
+    let python_highlight_all = 1
 " }
 
 " Key Mappings {
@@ -207,17 +207,8 @@
     " Yank from the cursor to the end of the line, to be consistent with C and D.
     nnoremap Y y$
 
-    " Code folding options
-    nmap <leader>f0 :set foldlevel=0<CR>
-    nmap <leader>f1 :set foldlevel=1<CR>
-    nmap <leader>f2 :set foldlevel=2<CR>
-    nmap <leader>f3 :set foldlevel=3<CR>
-    nmap <leader>f4 :set foldlevel=4<CR>
-    nmap <leader>f5 :set foldlevel=5<CR>
-    nmap <leader>f6 :set foldlevel=6<CR>
-    nmap <leader>f7 :set foldlevel=7<CR>
-    nmap <leader>f8 :set foldlevel=8<CR>
-    nmap <leader>f9 :set foldlevel=9<CR>
+    " Folding with the spacebar
+    nnoremap <space> za
 
     " toggle search highlighting
     nmap <silent> <leader>/ :nohlsearch<CR>
@@ -241,20 +232,12 @@
     " For when you forget to sudo.. Really Write the file.
     cmap w!! w !sudo tee % >/dev/null
 
-    " Some helpers to edit mode
-    " http://vimcasts.org/e/14
-    "cnoremap %% <C-R>=fnameescape(expand('%:h')).'/'<cr>
-    "map <leader>ew :e %%
-    "map <leader>es :sp %%
-    "map <leader>ev :vsp %%
-    "map <leader>et :tabe %%
-
     " Adjust viewports to the same size
     map <Leader>= <C-w>=
 
     " Map <Leader>ff to display all lines with keyword under cursor
     " and ask which one to jump to
-    nmap <Leader>ff [I:let nr = input("Which one: ")<Bar>exe "normal " . nr ."[\t"<CR>
+    "nmap <Leader>ff [I:let nr = input("Which one: ")<Bar>exe "normal " . nr ."[\t"<CR>
 
     " Easier horizontal scrolling
     map zl zL
@@ -264,16 +247,23 @@
     nnoremap <silent> <leader>q gwip
 " }
 
-" Plugin Settings {
+" Plugin Settings/Mappings {
 
     " SnipMate {
         let g:snips_author = 'Dominik Drexl <dominik.drexl@bmw.de>'
     " }
 
+    " NerdCommenter {
+        if isdirectory(expand("~/.vim/plugged/nerdcommenter"))
+            nmap <leader><space> <Plug>NERDCommenterToggle
+            vmap <leader><space> <Plug>NERDCommenterToggle
+        endif
+    " }
+
     " NerdTree {
         if isdirectory(expand("~/.vim/plugged/nerdtree"))
-            map <C-n> :NERDTreeToggle<CR>
-            map <leader>n :NERDTreeFind<CR>
+            nmap <C-n> :NERDTreeToggle<CR>
+            nmap <leader>n :NERDTreeFind<CR>
 
             let g:NERDShutUp=1
             let NERDTreeShowBookmarks=1
@@ -325,10 +315,10 @@
     " ctrlp {
         if isdirectory(expand("~/.vim/plugged/ctrlp.vim/"))
             let g:ctrlp_working_path_mode = 'ra'
-            nnoremap <leader>.f :CtrlP<CR>
-            nnoremap <leader>.b :CtrlPBuffer<CR>
-            nnoremap <leader>.t :CtrlPTag<CR>
-            nnoremap <leader>.r :CtrlPMRU<CR>
+            nnoremap <leader>f :CtrlP<CR>
+            nnoremap <leader>b :CtrlPBuffer<CR>
+            nnoremap <leader>t :CtrlPTag<CR>
+            nnoremap <leader>r :CtrlPMRU<CR>
 
             let g:ctrlp_custom_ignore = {
                 \ 'dir':  '\.git$\|\.hg$\|\.svn$',
@@ -381,8 +371,6 @@
             nnoremap <silent> <leader>gr :Gread<CR>
             nnoremap <silent> <leader>gw :Gwrite<CR>
             nnoremap <silent> <leader>ge :Gedit<CR>
-            " Mnemonic _i_nteractive
-            nnoremap <silent> <leader>gi :Git add -p %<CR>
             "nnoremap <silent> <leader>gg :SignifyToggle<CR> todo
         endif
     "}
@@ -418,11 +406,10 @@
             let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
             let g:ycm_confirm_extra_conf = 1
 
-            noremap <leader>j :YcmCompleter GoTo<CR>
-            " Disable the neosnippet preview candidate window
-            " When enabled, there can be too much visual noise
-            " especially when splits are used.
-            "set completeopt-=preview todo
+            " YcmCompleter subcommand mappings
+            noremap <leader>.g :YcmCompleter GoTo<CR>
+            noremap <leader>.f :YcmCompleter FixIt<CR>
+            noremap <leader>.r :YcmCompleter GoToReferences<CR>
         endif
     " }
 
@@ -452,8 +439,6 @@
             let g:clang_format#detect_style_file = 1
 
             augroup clangFMT
-                autocmd FileType cpp nnoremap <buffer><leader>r :<C-u>ClangFormat<CR>
-                autocmd FileType cpp vnoremap <buffer><leader>r :ClangFormat<CR>
                 autocmd FileType cpp let g:clang_format#auto_format = 1
             augroup END
 
@@ -481,14 +466,12 @@
 " GVim Settings {
 
     if has('gui_running')
+        " Use the Solarized Dark theme
+        set background=dark
+        colorscheme solarized
+        set linespace=8             " Better line-height
         set guioptions-=T           " Remove the toolbar
         set lines=40                " 40 lines of text instead of 24
-        set guifont=Andale\ Mono\ Regular\ 12,Menlo\ Regular\ 11,Consolas\ Regular\ 12,Courier\ New\ Regular\ 14
-    else
-        if &term == 'xterm' || &term == 'screen'
-            set t_Co=256            " Enable 256 colors to stop the CSApprox warning and make xterm vim shine
-        endif
-        "set term=builtin_ansi       " Make arrow and other keys work
     endif
 
 " }
