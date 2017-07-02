@@ -7,11 +7,18 @@ git pull origin master;
 function copy_to_home() {
     # never overwrite existing .gitconfig
     if [ ! -f ~/.gitconfig ]; then
-        cp .gitconfig ~/.gitconfig
+        cp ".gitconfig" "~/.gitconfig"
     fi
+
+    # never overwrite existing .vimrc.local
+    if [ ! -f ~/.vimrc.local ]; then
+        cp ".vimrc.local" "~/.vimrc.local"
+    fi
+
     rsync --exclude ".git/" \
         --exclude "bootstrap.sh" \
         --exclude ".gitconfig" \
+        --exclude ".vimrc.local" \
         --exclude "install_packages.sh" \
         --exclude "README.md" \
         -avh --no-perms . ~;
