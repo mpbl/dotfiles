@@ -54,6 +54,7 @@
         Plug 'valloric/youcompleteme'           " Code completion engine!!
         Plug 'vim-airline/vim-airline'          " Statusline
         Plug 'vim-airline/vim-airline-themes'   " Solarized theme for airline
+        Plug 'vimwiki/vimwiki'                  " Notes and todo lists in vim
 
         call plug#end()
     endif
