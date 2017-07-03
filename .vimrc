@@ -46,11 +46,12 @@
         Plug 'majutsushi/tagbar'                " Tags in sidebar
         Plug 'mbbill/undotree'                  " Undo sidebar
         Plug 'rhysd/vim-clang-format', { 'for': 'cpp' }         " c++ formatting
-        Plug 'scrooloose/nerdcommenter'                         " Code commenting
         Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }  " File browser sidebar
         Plug 'sirver/ultisnips' | Plug 'honza/vim-snippets'     " Code snippets
-        Plug 'tpope/vim-fugitive'                               " Git in Vim!!
-        Plug 'tpope/vim-surround' | Plug 'tpope/vim-repeat'     " Repeatable surrounding commands
+        Plug 'tpope/vim-commentary'             " Code commenting
+        Plug 'tpope/vim-fugitive'               " Git in Vim!!
+        Plug 'tpope/vim-repeat'                 " Repeatable tpope commands
+        Plug 'tpope/vim-surround'               " Parenthesis commands
         Plug 'valloric/youcompleteme'           " Code completion engine!!
         Plug 'vim-airline/vim-airline'          " Statusline
         Plug 'vim-airline/vim-airline-themes'   " Solarized theme for airline
@@ -263,10 +264,11 @@
         let g:snips_author = 'Dominik Drexl <dominik.drexl@bmw.de>'
     " }
 
-    " NerdCommenter {
-        if isdirectory(expand("~/.vim/plugged/nerdcommenter"))
-            nmap <leader><space> <Plug>NERDCommenterToggle
-            vmap <leader><space> <Plug>NERDCommenterToggle
+    " Commentary {
+        if isdirectory(expand("~/.vim/plugged/vim-commentary"))
+            augroup commentSTRING
+                autocmd FileType c,cpp,cs,java setlocal commentstring=//\ %s
+            augroup END
         endif
     " }
 
