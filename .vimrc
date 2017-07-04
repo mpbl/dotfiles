@@ -45,6 +45,7 @@
         Plug 'easymotion/vim-easymotion'        " Speed of light motion
         Plug 'majutsushi/tagbar'                " Tags in sidebar
         Plug 'mbbill/undotree'                  " Undo sidebar
+        Plug 'michaeljsmith/vim-indent-object'  " Indent object
         Plug 'rhysd/vim-clang-format', { 'for': 'cpp' }         " c++ formatting
         Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }  " File browser sidebar
         Plug 'sirver/ultisnips' | Plug 'honza/vim-snippets'     " Code snippets
