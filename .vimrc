@@ -53,6 +53,7 @@
         Plug 'tpope/vim-fugitive'               " Git in Vim!!
         Plug 'tpope/vim-repeat'                 " Repeatable tpope commands
         Plug 'tpope/vim-surround'               " Parenthesis commands
+        Plug 'tpope/vim-unimpaired'             " Pairs of handy bracket mappings
         Plug 'valloric/youcompleteme'           " Code completion engine!!
         Plug 'vim-airline/vim-airline'          " Statusline
         Plug 'vim-airline/vim-airline-themes'   " Solarized theme for airline
