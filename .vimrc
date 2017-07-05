@@ -2,13 +2,18 @@
 " vim: set sw=4 ts=4 sts=4 et tw=78 foldmarker={,} foldlevel=0 foldmethod=marker spell:
 "
 "   This is the personal .vimrc file of Dominik.Drexl@bmw.de
-"   While everything is free for you to copy, I would
-"   recommend picking out the parts you want and understand.
+"   Everything is free for you to copy, but make sure you want and understand
+"   the parts you pick. If you just want to add or overwrite something, I
+"   recommend putting it in ~/.vimrc.local
 " }
 
 " Environment {
-    set nocompatible        " Must be first line
-    set shell=/bin/sh
+    set nocompatible                " Must be first line
+    if &shell =~# 'fish$' && (v:version < 704 || v:version == 704 && !has('patch276'))
+      set shell=/bin/bash
+    else
+      set shell=/bin/sh
+    endif
 " }
 
 " Plugins {
@@ -59,6 +64,7 @@
         Plug 'vim-airline/vim-airline-themes'   " Solarized theme for airline
         Plug 'vim-scripts/argtextobj.vim'       " Argument object
         Plug 'vimwiki/vimwiki'                  " Notes and todo lists in vim
+        Plug 'vim-scripts/matchit.zip'          " Improve % operation
 
         call plug#end()
     endif
@@ -66,8 +72,8 @@
 
 " General {
 
-    filetype plugin indent on   " Automatically detect file types.
-    syntax on                   " Syntax highlighting
+    filetype plugin indent on       " Automatically detect file types.
+    syntax enable                   " Syntax highlighting
     scriptencoding utf-8
 
     " Always switch to the current file directory
@@ -90,9 +96,7 @@
     " Centralize backups, swapfiles and undo history
     set backupdir=~/.vimcache/backups
     set directory=~/.vimcache/swaps
-    if exists("&undodir")
-        set undodir=~/.vimcache/undo
-    endif
+    set undodir=~/.vimcache/undo
     " Don’t create backups when editing files in certain directories
     set backupskip=/tmp/*,/private/tmp/*
 
@@ -114,6 +118,7 @@
     set iskeyword-=-                " '-' is an end of word designator
 
     set title                       " Show the filename in the window titlebar
+    set autoread                    " Refresh buffers automatically
     set mouse=a                     " Enable mouse in all modes
     set noerrorbells                " Disable error bells
     set modeline                    " Respect modeline in files
@@ -135,12 +140,34 @@
     set wildmode=list:longest,full  " Command <Tab> completion, list matches, then longest common part, then all.
     set whichwrap=b,s,h,l,<,>,[,]   " Backspace and cursor keys wrap too
     set scrolljump=5                " Lines to scroll when cursor leaves screen
-    set scrolloff=3                 " Minimum lines to keep above and below cursor
+    set scrolloff=1                 " Minimum lines to keep above and below cursor
     set foldenable                  " Auto fold code
     set list                        " Show “invisible” characters
-    set listchars=tab:▸\ ,trail:•,extends:#,nbsp:.
-    "set ttyfast                     " Optimize for fast terminal connections
-    set encoding=utf-8 nobomb       " Use UTF-8 without BOM
+    set listchars=tab:▸\ ,trail:•,extends:>,precedes:<,nbsp:.
+    set ttyfast                     " Optimize for fast terminal connections
+    set encoding=utf-8 bomb         " Use UTF-8 with byte order mark
+    set complete-=i
+    set smarttab
+    set nrformats-=octal            " Dont increment octals
+    set sessionoptions-=options     " Dont save everything of the session
+    set display+=lastline           " No legacy vi display
+
+    if v:version > 703 || v:version == 703 && has("patch541")
+      set formatoptions+=j          " Delete comment character when joining commented lines
+    endif
+
+    if has('path_extra')
+      setglobal tags-=./tags tags-=./tags; tags^=./tags;
+    endif
+
+    if !empty(&viminfo)
+      set viminfo^=!
+    endif
+
+    " Load matchit.vim, but only if the user hasn't installed a newer version.
+    "if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
+    "  runtime! macros/matchit.vim
+    "endif
 
 " }
 
@@ -313,21 +340,13 @@
         endif
     " }
 
-    " PyMode {
-        " Disable if python support not present
-        if !has('python') && !has('python3')
-            let g:pymode = 0
-        endif
-
-        if isdirectory(expand("~/.vim/plugged/python-mode"))
-            let g:pymode_lint_checkers = ['pyflakes']
-            let g:pymode_trim_whitespaces = 0
-            let g:pymode_options = 0
-            let g:pymode_rope = 0
+    " Easy Motion {
+        if isdirectory(expand("~/.vim/plugged/vim-easymotion"))
+            map s <Plug>(easymotion-prefix)
         endif
     " }
 
-    " ctrlp {
+    " CtrlP {
         if isdirectory(expand("~/.vim/plugged/ctrlp.vim/"))
             let g:ctrlp_working_path_mode = 'ra'
             nnoremap <leader>f :CtrlP<CR>
@@ -366,12 +385,6 @@
         if isdirectory(expand("~/.vim/plugged/tagbar/"))
             nnoremap <silent> <leader>tt :TagbarToggle<CR>
             let g:tagbar_autofocus = 1
-        endif
-    "}
-
-    " Rainbow {
-        if isdirectory(expand("~/.vim/plugged/rainbow/"))
-            let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle
         endif
     "}
 
@@ -436,7 +449,7 @@
         endif
     " }
 
-    " vim-airline {
+    " Airline {
         " Set configuration options for the statusline plugin vim-airline.
         " Use the symbols , , , , , , and .in the statusline
         " If the previous symbols do not render for you then install a
@@ -456,7 +469,6 @@
             augroup clangFMT
                 autocmd FileType cpp let g:clang_format#auto_format = 1
             augroup END
-
         endif
     " }
 
