@@ -17,28 +17,25 @@
 " }
 
 " Plugins {
-
     " First Time Only Installs {
+        " Install vim-plug if we don't already have it
+        if empty(glob("~/.vim/autoload/plug.vim"))
+            echo "Installing plug.vim..\n"
+            silent !mkdir -p ~/.vim/autoload
+            silent !mkdir -p ~/.vim/plugged
+            execute 'silent !curl -fLo ~/.vim/autoload/plug.vim https://raw.github.com/junegunn/vim-plug/master/plug.vim'
+        endif
 
-    " Install vim-plug if we don't already have it
-    if empty(glob("~/.vim/autoload/plug.vim"))
-        echo "Installing plug.vim..\n"
-        silent !mkdir -p ~/.vim/autoload
-        silent !mkdir -p ~/.vim/plugged
-        execute 'silent !curl -fLo ~/.vim/autoload/plug.vim https://raw.github.com/junegunn/vim-plug/master/plug.vim'
-    endif
-
-    " Install powerline fonts if we don't already have it
-    if empty(glob("~/.fonts/ubuntu-mono-powerline-ttf"))
-        echo "Installing powerline fonts..\n"
-        silent !mkdir -p ~/.fonts/ubuntu-mono-powerline-ttf
-        execute 'silent !wget -q -P ~/.fonts/ubuntu-mono-powerline-ttf/ "https://raw.githubusercontent.com/powerline/fonts/master/UbuntuMono/Ubuntu Mono derivative Powerline Bold Italic.ttf"'
-        execute 'silent !wget -q -P ~/.fonts/ubuntu-mono-powerline-ttf/ "https://raw.githubusercontent.com/powerline/fonts/master/UbuntuMono/Ubuntu Mono derivative Powerline Bold.ttf"'
-        execute 'silent !wget -q -P ~/.fonts/ubuntu-mono-powerline-ttf/ "https://raw.githubusercontent.com/powerline/fonts/master/UbuntuMono/Ubuntu Mono derivative Powerline Italic.ttf"'
-        execute 'silent !wget -q -P ~/.fonts/ubuntu-mono-powerline-ttf/ "https://raw.githubusercontent.com/powerline/fonts/master/UbuntuMono/Ubuntu Mono derivative Powerline.ttf"'
-        execute 'silent !fc-cache -vf'
-    endif
-
+        " Install powerline fonts if we don't already have it
+        if empty(glob("~/.fonts/ubuntu-mono-powerline-ttf"))
+            echo "Installing powerline fonts..\n"
+            silent !mkdir -p ~/.fonts/ubuntu-mono-powerline-ttf
+            execute 'silent !wget -q -P ~/.fonts/ubuntu-mono-powerline-ttf/ "https://raw.githubusercontent.com/powerline/fonts/master/UbuntuMono/Ubuntu Mono derivative Powerline Bold Italic.ttf"'
+            execute 'silent !wget -q -P ~/.fonts/ubuntu-mono-powerline-ttf/ "https://raw.githubusercontent.com/powerline/fonts/master/UbuntuMono/Ubuntu Mono derivative Powerline Bold.ttf"'
+            execute 'silent !wget -q -P ~/.fonts/ubuntu-mono-powerline-ttf/ "https://raw.githubusercontent.com/powerline/fonts/master/UbuntuMono/Ubuntu Mono derivative Powerline Italic.ttf"'
+            execute 'silent !wget -q -P ~/.fonts/ubuntu-mono-powerline-ttf/ "https://raw.githubusercontent.com/powerline/fonts/master/UbuntuMono/Ubuntu Mono derivative Powerline.ttf"'
+            execute 'silent !fc-cache -vf'
+        endif
     " }
 
     if filereadable(expand("~/.vim/autoload/plug.vim"))
@@ -71,7 +68,6 @@
 " }
 
 " General {
-
     filetype plugin indent on       " Automatically detect file types.
     syntax enable                   " Syntax highlighting
     scriptencoding utf-8
@@ -163,27 +159,20 @@
     if !empty(&viminfo)
       set viminfo^=!
     endif
-
-    " Load matchit.vim, but only if the user hasn't installed a newer version.
-    "if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
-    "  runtime! macros/matchit.vim
-    "endif
-
 " }
 
-" Colorscheme {
-
+" Solarized Colorscheme {
     if filereadable(expand("~/.vim/plugged/vim-colors-solarized/colors/solarized.vim"))
-        let g:solarized_termcolors=256
+        let g:solarized_termcolors=16       " must have solarized palette in
+                                            " terminal emulator to work
         let g:solarized_termtrans=1
         let g:solarized_contrast="normal"
         let g:solarized_visibility="normal"
-        color solarized             " Load a colorscheme
+        colorscheme solarized
     endif
 
     " colors for vimdiff
     highlight DiffText cterm=none ctermfg=White ctermbg=Red gui=none guifg=White guibg=Red
-
 " }
 
 " Formatting {
@@ -196,7 +185,7 @@
     set nojoinspaces                " Prevents inserting two spaces after punctuation on a join (J)
     set splitright                  " Puts new vsplit windows to the right of the current
     set splitbelow                  " Puts new split windows to the bottom of the current
-    "set matchpairs+=<:>             " Match, to be used with %
+    set matchpairs+=<:>             " Match, to be used with %
     set pastetoggle=<F12>           " pastetoggle (sane indentation on pastes)
     " Remove trailing whitespaces and ^M chars
     augroup stripWHITESPACE
@@ -206,7 +195,6 @@
 " }
 
 " Key Mappings {
-
     " the default leader is '\', but I prefer ','
     let mapleader = ','
     let maplocalleader = '_'
@@ -285,7 +273,6 @@
     nnoremap <silent> <leader>q :copen<CR>
     " Clear  quickfix window
     nnoremap <silent> <leader>cq :cexpr []<CR>
-
 " }
 
 " Plugin Settings/Mappings {
@@ -475,7 +462,6 @@
 " }
 
 " GVim Settings {
-
     if has('gui_running')
         " Use the Solarized Dark theme
         set background=dark
@@ -484,46 +470,45 @@
         set guioptions-=T           " Remove the toolbar
         set lines=40                " 40 lines of text instead of 24
     endif
-
 " }
 
 " Functions {
 
     " Strip whitespace {
-    function! StripTrailingWhitespace()
-        " Preparation: save last search, and cursor position.
-        let _s=@/
-        let l = line(".")
-        let c = col(".")
-        " do the business:
-        %s/\s\+$//e
-        " clean up: restore previous search history, and cursor position
-        let @/=_s
-        call cursor(l, c)
-    endfunction
+        function! StripTrailingWhitespace()
+            " Preparation: save last search, and cursor position.
+            let _s=@/
+            let l = line(".")
+            let c = col(".")
+            " do the business:
+            %s/\s\+$//e
+            " clean up: restore previous search history, and cursor position
+            let @/=_s
+            call cursor(l, c)
+        endfunction
     " }
 
     " Shell command {
-    function! s:RunShellCommand(cmdline)
-        botright new
+        function! s:RunShellCommand(cmdline)
+            botright new
 
-        setlocal buftype=nofile
-        setlocal bufhidden=delete
-        setlocal nobuflisted
-        setlocal noswapfile
-        setlocal nowrap
-        setlocal filetype=shell
-        setlocal syntax=shell
+            setlocal buftype=nofile
+            setlocal bufhidden=delete
+            setlocal nobuflisted
+            setlocal noswapfile
+            setlocal nowrap
+            setlocal filetype=shell
+            setlocal syntax=shell
 
-        call setline(1, a:cmdline)
-        call setline(2, substitute(a:cmdline, '.', '=', 'g'))
-        execute 'silent $read !' . escape(a:cmdline, '%#')
-        setlocal nomodifiable
-        1
-    endfunction
+            call setline(1, a:cmdline)
+            call setline(2, substitute(a:cmdline, '.', '=', 'g'))
+            execute 'silent $read !' . escape(a:cmdline, '%#')
+            setlocal nomodifiable
+            1
+        endfunction
 
-    command! -complete=file -nargs=+ Shell call s:RunShellCommand(<q-args>)
-    " e.g. Grep current file for <search_term>: Shell grep -Hn <search_term> %
+        command! -complete=file -nargs=+ Shell call s:RunShellCommand(<q-args>)
+        " e.g. Grep current file for <search_term>: Shell grep -Hn <search_term> %
     " }
 
     " Search visual selection {

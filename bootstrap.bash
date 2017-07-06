@@ -16,10 +16,11 @@ function copy_to_home() {
     fi
 
     rsync --exclude ".git/" \
-        --exclude "bootstrap.sh" \
+        --exclude "bootstrap.bash" \
         --exclude ".gitconfig" \
         --exclude ".vimrc.local" \
-        --exclude "install_packages.sh" \
+        --exclude "install_packages.bash" \
+        --exclude "install_sol_dark_terminal.bash" \
         --exclude "README.md" \
         -avh --no-perms . ~;
     source ~/.bashrc;

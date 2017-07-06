@@ -54,3 +54,6 @@ complete -o "nospace" -W "firefox sl" killall
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
+if [ -f ~/.dir_colors/dircolors ]
+    then eval `dircolors ~/.dir_colors/dircolors`
+fi
