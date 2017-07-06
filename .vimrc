@@ -145,7 +145,7 @@
     set list                        " Show “invisible” characters
     set listchars=tab:▸\ ,trail:•,extends:>,precedes:<,nbsp:.
     set ttyfast                     " Optimize for fast terminal connections
-    set encoding=utf-8 bomb         " Use UTF-8 with byte order mark
+    set encoding=utf-8              " Use UTF-8
     set complete-=i
     set smarttab
     set nrformats-=octal            " Dont increment octals
