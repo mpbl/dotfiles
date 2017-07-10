@@ -28,8 +28,8 @@
     autosetupmerge = always
     # pull --rebase default
     autosetuprebase = always
-[push]
-    default = matching
+[pager]
+    log = false
 [core]
     eol = native
     excludesfile = ~/.gitignore
@@ -48,6 +48,12 @@
     added = green
     changed = red
     untracked = cyan
+[color "decorate"]
+    HEAD = cyan
+    branch = green
+    remoteBranch = red
+    stash = magenta
+    tag = yellow reverse
 [diff]
     indentHeuristic = true
     compactionHeuristic = true
