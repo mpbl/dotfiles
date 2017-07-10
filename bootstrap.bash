@@ -20,7 +20,7 @@ function copy_to_home() {
         --exclude ".gitconfig" \
         --exclude ".vimrc.local" \
         --exclude "install_packages.bash" \
-        --exclude "install_sol_dark_terminal.bash" \
+        --exclude "install_sol_dark_terminal.zsh" \
         --exclude "README.md" \
         -avh --no-perms . ~;
     source ~/.bashrc;
@@ -28,6 +28,7 @@ function copy_to_home() {
 
 if [ "$1" == "--force" -o "$1" == "-f" ]; then
     copy_to_home;
+    ln -sf ~/.spaceship.zsh "$ZSH_CUSTOM/themes/spaceship.zsh-theme" 2> /dev/null
 else
     read -p "This may overwrite existing files in your home directory. Are you sure? (y/n) " -n 1;
     echo "";
