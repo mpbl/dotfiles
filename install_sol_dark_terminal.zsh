@@ -24,7 +24,7 @@ install_powerline_fonts() {
 
     if [[ ! -e ~/.config/fontconfig/conf.d/$POWERLINE_SYMBOLS_CONF ]]; then
         curl -fsSL $POWERLINE_URL/$POWERLINE_SYMBOLS_CONF -o /tmp/$POWERLINE_SYMBOLS_CONF
-        mkdir ~/.config/fontconfig/conf.d 2> /dev/null
+        mkdir -p ~/.config/fontconfig/conf.d 2> /dev/null
         mv /tmp/$POWERLINE_SYMBOLS_CONF ~/.config/fontconfig/conf.d/$POWERLINE_SYMBOLS_CONF
     fi
 }
