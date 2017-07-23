@@ -63,7 +63,7 @@
         Plug 'vimwiki/vimwiki'                  " Notes and todo lists in vim
         Plug 'vim-scripts/matchit.zip'          " Improve % operation
         Plug 'godlygeek/tabular'                " Text alignment
-
+        Plug 'taketwo/vim-ros'
         call plug#end()
     endif
 " }
@@ -190,7 +190,7 @@
     set pastetoggle=<F12>           " pastetoggle (sane indentation on pastes)
     " Remove trailing whitespaces and ^M chars
     augroup stripWHITESPACE
-        autocmd FileType c,cpp,python,xml,yml autocmd BufWritePre <buffer> call StripTrailingWhitespace()
+        autocmd FileType c,cpp,python,xml,yml,cmake autocmd BufWritePre <buffer> call StripTrailingWhitespace()
     augroup END
     let python_highlight_all = 1
 " }
@@ -426,6 +426,12 @@
             noremap <leader>.g :YcmCompleter GoTo<CR>
             noremap <leader>.f :YcmCompleter FixIt<CR>
             noremap <leader>.r :YcmCompleter GoToReferences<CR>
+
+            " Ycm Integration for the vim-ros plugin
+            let g:ycm_semantic_triggers = {
+            \   'roslaunch' : ['="', '$(', '/'],
+            \   'rosmsg,rossrv,rosaction' : ['re!^', '/'],
+            \ }
         endif
     " }
 
