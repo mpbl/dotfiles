@@ -82,6 +82,9 @@ if [ -f ~/.dir_colors/dircolors ]
     then eval `dircolors ~/.dir_colors/dircolors`
 fi
 
+if [ -f ~/.zshrc.local ]
+    then source ~/.zshrc.local
+fi
 # tmux
 ZSH_TMUX_AUTOSTART=true
 ZSH_TMUX_AUTOSTART_ONCE=true

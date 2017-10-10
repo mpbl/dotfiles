@@ -63,7 +63,7 @@
         Plug 'vimwiki/vimwiki'                  " Notes and todo lists in vim
         Plug 'vim-scripts/matchit.zip'          " Improve % operation
         Plug 'godlygeek/tabular'                " Text alignment
-        Plug 'taketwo/vim-ros'
+        Plug 'taketwo/vim-ros'                  " Ros config highlighting and more
         call plug#end()
     endif
 " }
@@ -170,6 +170,7 @@
         let g:solarized_contrast="normal"
         let g:solarized_visibility="normal"
         colorscheme solarized
+        set t_Co=16
     endif
 
     " colors for vimdiff
@@ -190,15 +191,22 @@
     set pastetoggle=<F12>           " pastetoggle (sane indentation on pastes)
     " Remove trailing whitespaces and ^M chars
     augroup stripWHITESPACE
-        autocmd FileType c,cpp,python,xml,yml,cmake autocmd BufWritePre <buffer> call StripTrailingWhitespace()
+        autocmd FileType c,cpp,python,xml,yml,cmake,sh,bash,py,gitcommit,yaml autocmd BufWritePre <buffer> call StripTrailingWhitespace()
     augroup END
     let python_highlight_all = 1
 " }
 
 " Key Mappings {
-    " the default leader is '\', but I prefer ','
     let mapleader = ','
     let maplocalleader = '_'
+
+    " Move lines with up/down arrowkeys
+    nmap <Up> :m .-2<CR>
+    nmap <Down> :m .+1<CR>
+
+    " Disable left right arrow keys
+    nmap <Left> <Nop>
+    nmap <Right> <Nop>
 
     " F keys
     noremap <F2> :w<CR>
@@ -323,6 +331,8 @@
             vmap <Leader>a, :Tabularize /,<CR>
             nmap <Leader>a,, :Tabularize /,\zs<CR>
             vmap <Leader>a,, :Tabularize /,\zs<CR>
+            nmap <Leader>a" :Tabularize /"<CR>
+            vmap <Leader>a" :Tabularize /"<CR>
             nmap <Leader>a<Bar> :Tabularize /<Bar><CR>
             vmap <Leader>a<Bar> :Tabularize /<Bar><CR>
         endif
@@ -463,6 +473,12 @@
             augroup clangFMT
                 autocmd FileType cpp let g:clang_format#auto_format = 1
             augroup END
+        endif
+    " }
+
+    " { VimRos
+        if isdirectory(expand("~/.vim/plugged/vim-ros/"))
+            " set makeprg=catkin\ bt
         endif
     " }
 
