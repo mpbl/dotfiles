@@ -5,11 +5,15 @@ this repository, review the code, and remove things you don’t want or need.
 Don’t blindly use my settings unless you know what that entails. Use at your
 own risk!
 
+This repository is mainly to keep my personal changes.
+Thanks to [DDrexl](https://github.com/ddrexl) who helped me getting started with vim
+with, but not only, the collection of dotfiles.
+
 ## Install
 
 Clone the repository.
 ```bash
-git clone https://github.com/ddrexl/dotfiles.git
+git clone https://github.com/FaBrand/dotfiles
 ```
 
 Run the package install script. It will install some essential packages for my
@@ -51,7 +55,7 @@ cd ~/.vim/plugged/youcompleteme   # go to plugin directory
 
 ## Feedback
 
-Feel free to leave your [suggestions/improvements](https://github.com/ddrexl/dotfiles/issues)!
+Feel free to leave your [suggestions/improvements](https://github.com/FaBrand/dotfiles/issues)!
 
 ## Thanks to…
 
