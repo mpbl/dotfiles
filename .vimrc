@@ -295,7 +295,7 @@
         if isdirectory(expand("~/.vim/plugged/vim-commentary"))
             augroup commentSTRING
                 autocmd FileType c,cpp,cs,java setlocal commentstring=//\ %s
-                autocmd FileType yaml setlocal commentstring=# %s
+                autocmd FileType yaml setlocal commentstring=#\ %s
             augroup END
         endif
     " }
