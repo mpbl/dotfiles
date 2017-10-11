@@ -64,6 +64,7 @@
         Plug 'vim-scripts/matchit.zip'          " Improve % operation
         Plug 'godlygeek/tabular'                " Text alignment
         Plug 'taketwo/vim-ros'                  " Ros config highlighting and more
+        Plug 'chenzhiwo/ycm-extra-conf-ros'     " Ros Config for ycm
         call plug#end()
     endif
 " }
@@ -430,8 +431,11 @@
             let g:ycm_python_binary_path = '/usr/bin/python3'
 
             " c lang family completion
-            let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
             let g:ycm_confirm_extra_conf = 1
+
+            " The extra configuration is handled by the extra extra
+            " ycm-extra-conf-ros plugin (ycm_global_extra_conf is set there
+            " accordingly)
 
             " YcmCompleter subcommand mappings
             noremap <leader>.g :YcmCompleter GoTo<CR>
