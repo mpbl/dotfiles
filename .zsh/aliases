@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
 alias ..="cd .."
 alias ...="cd ../.."
@@ -8,21 +8,16 @@ alias -- -="cd -"
 
 # Shortcuts
 alias g="git"
+alias gut="git"
+alias got="git"
 alias h="history"
 alias j="jobs"
 
-alias tp='ping -c 3 www.gentoo.org'
-alias dfh='df -h ~'
-alias t='tree -d'
-
 # enable color support of ls and also add handy aliases
-if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
-fi
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
 
 # ls
 alias l='ls -alh'
@@ -67,3 +62,9 @@ alias reload="exec $SHELL -l"
 
 # Print each PATH entry on a separate line
 alias path='echo -e ${PATH//:/\\n}'
+alias grep='grep  --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.repo,.catkin_tools}'
+alias s='git st'
+alias a='git adog'
+alias cm='git checkout master'
+alias gp='git pull'
+alias thefuck='fuck'
