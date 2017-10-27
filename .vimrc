@@ -50,6 +50,7 @@
         Plug 'rhysd/vim-clang-format', { 'for': 'cpp' }        " c++ formatting
         Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' } " File browser sidebar
         Plug 'sirver/ultisnips'                                " Code snippets
+        Plug 'honza/vim-snippets'                              " Code snippets
         Plug 'tpope/vim-commentary'                            " Code commenting
         Plug 'tpope/vim-fugitive'                              " Git in Vim!!
         Plug 'tpope/vim-repeat'                                " Repeatable tpope commands
@@ -59,11 +60,11 @@
         Plug 'vim-airline/vim-airline'                         " Statusline
         Plug 'vim-airline/vim-airline-themes'                  " Solarized theme for airline
         Plug 'vim-scripts/argtextobj.vim'                      " Argument object
-        Plug 'vimwiki/vimwiki'                                 " Notes and todo lists in vim
         Plug 'vim-scripts/matchit.zip'                         " Improve % operation
         Plug 'godlygeek/tabular'                               " Text alignment
         Plug 'taketwo/vim-ros'                                 " Ros config highlighting and more
         Plug 'chenzhiwo/ycm-extra-conf-ros'                    " Ros Config for ycm
+        Plug 'Townk/vim-autoclose'                             " Auto close brackets
         call plug#end()
     endif
 " }
@@ -289,7 +290,7 @@
         if isdirectory(expand("~/.vim/plugged/vim-commentary"))
             augroup commentSTRING
                 autocmd FileType c,cpp,cs,java setlocal commentstring=//\ %s
-                autocmd FileType yaml setlocal commentstring=#\ %s
+                autocmd FileType yaml,cmake setlocal commentstring=#\ %s
             augroup END
         endif
     " }
@@ -349,8 +350,8 @@
             nnoremap <leader>r :CtrlPMRU<CR>
 
             let g:ctrlp_custom_ignore = {
-                \ 'dir':  '\.git$\|\.hg$\|\.svn$',
-                \ 'file': '\.exe$\|\.so$\|\.dll$\|\.pyc$' }
+               \ 'dir':  '\.(git|hg|svn|repo|catkin)$',
+               \ 'file': '\.(exe|so|dll|py(d|c))$' }
 
             if executable('ag')
                 let s:ctrlp_fallback = 'ag %s --nocolor -l -g ""'
@@ -396,6 +397,14 @@
             "nnoremap <silent> <leader>gg :SignifyToggle<CR> todo
         endif
     "}
+
+    " UltiSnips {
+        " Remap Editing of snippets to a shortcut
+        nnoremap <silent> <leader>ue :UltiSnipsEdit<CR>
+        " Open Snippet edit as split
+        let g:UltiSnipsEditSplit="vertical"
+        let g:UltiSnipsSnippetDirectories = ['~/.vim/plugged/ultisnips/UltiSnips', 'UltiSnips']
+    " }
 
     " YouCompleteMe {
         if isdirectory(expand("~/.vim/plugged/youcompleteme/"))
