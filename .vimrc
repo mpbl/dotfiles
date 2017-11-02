@@ -64,7 +64,6 @@
         Plug 'godlygeek/tabular'                               " Text alignment
         Plug 'taketwo/vim-ros'                                 " Ros config highlighting and more
         Plug 'chenzhiwo/ycm-extra-conf-ros'                    " Ros Config for ycm
-        Plug 'Townk/vim-autoclose'                             " Auto close brackets
         call plug#end()
     endif
 " }

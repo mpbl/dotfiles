@@ -37,4 +37,13 @@ fi
 rm -rf $zsh
 git clone https://github.com/FaBrand/oh-my-zsh.git $zsh
 
-
+# Install a fuzzy file finder for the command line (https://github.com/junegunn/fzf)
+which fzf > /dev/null
+if [[ $? -eq 1 ]]; then
+    fzf_install_dir="/tmp/fzf"
+    mkdir -p $fzf_install_dir
+    cd $fzf_install_dir
+    git clone --depth 1 https://github.com/junegunn/fzf.git $fzf_install_dir
+    $fzf_install_dir/install
+    cd -
+fi
