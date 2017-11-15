@@ -56,14 +56,15 @@
         Plug 'tpope/vim-repeat'                                " Repeatable tpope commands
         Plug 'tpope/vim-surround'                              " Parenthesis commands
         Plug 'tpope/vim-unimpaired'                            " Pairs of handy bracket mappings
-        Plug 'valloric/youcompleteme'                          " Code completion engine!!
+        Plug 'valloric/youcompleteme', {'do' : './install.py --clang-completer'}                          " Code completion engine!!
         Plug 'vim-airline/vim-airline'                         " Statusline
         Plug 'vim-airline/vim-airline-themes'                  " Solarized theme for airline
         Plug 'vim-scripts/argtextobj.vim'                      " Argument object
         Plug 'vim-scripts/matchit.zip'                         " Improve % operation
         Plug 'godlygeek/tabular'                               " Text alignment
-        Plug 'taketwo/vim-ros'                                 " Ros config highlighting and more
         Plug 'chenzhiwo/ycm-extra-conf-ros'                    " Ros Config for ycm
+        Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
+        Plug 'vim-syntastic/syntastic'                    " Ros Config for ycm
         call plug#end()
     endif
 " }
@@ -419,7 +420,8 @@
             let g:UltiSnipsJumpForwardTrigger = '<C-j>'
             let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
 
-            let g:ycm_show_diagnostics_ui = 1
+            let g:ycm_register_as_syntastic_checker = 1 "default 1
+            let g:ycm_show_diagnostics_ui = 0
 
             " Enable omni completion.
             augroup omniCOMPLETE
@@ -433,7 +435,7 @@
             let g:ycm_python_binary_path = '/usr/bin/python3'
 
             " c lang family completion
-            let g:ycm_confirm_extra_conf = 1
+            let g:ycm_confirm_extra_conf = 0
 
             " The extra configuration is handled by the extra extra
             " ycm-extra-conf-ros plugin (ycm_global_extra_conf is set there
@@ -443,8 +445,10 @@
             noremap <leader>.g :YcmCompleter GoTo<CR>
             noremap <leader>.f :YcmCompleter FixIt<CR>
             noremap <leader>.r :YcmCompleter GoToReferences<CR>
+            nnoremap <F11> :YcmForceCompileAndDiagnostics <CR>
 
             " Ycm Integration for the vim-ros plugin
+
             let g:ycm_semantic_triggers = {
             \   'roslaunch' : ['="', '$(', '/'],
             \   'rosmsg,rossrv,rosaction' : ['re!^', '/'],
@@ -487,6 +491,20 @@
         if isdirectory(expand("~/.vim/plugged/vim-ros/"))
             " set makeprg=catkin\ bt
         endif
+    " }
+
+    " { Syntastic
+        set statusline+=%#warningmsg#
+        set statusline+=%{SyntasticStatuslineFlag()}
+        set statusline+=%*
+
+        let g:syntastic_always_populate_loc_list = 1
+        let g:syntastic_auto_loc_list = 1
+        let g:syntastic_check_on_open = 1
+        let g:syntastic_check_on_wq = 0
+
+        " Language specific settings
+        let g:syntastic_cpp_checkers = ['clang_tidy']
     " }
 
 " }
