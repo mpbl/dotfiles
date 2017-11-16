@@ -43,7 +43,7 @@ ZSH_THEME="bira"
 # ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
+COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
@@ -91,7 +91,9 @@ source $ZSH/oh-my-zsh.sh
 # SolDark colors
 export TERM="xterm-256color"
 if [ -f ~/.dir_colors/dircolors ]
-    then eval `dircolors ~/.dir_colors/dircolors.ansi-dark`
+    then eval `dircolors ~/.dir_colors/dircolors`
+else
+    echo "Dircolors could not be loaded, please try reinstalling the solarized colorscheme"
 fi
 
 if [ -f ~/.zsh/aliases ]

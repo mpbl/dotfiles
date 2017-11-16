@@ -1,6 +1,3 @@
-[user]
-    name = John Doe
-    email = john.doe@domain.com
 [credential]
     # for linux only
     helper = store
@@ -9,8 +6,36 @@
     pdm = push origin HEAD:refs/drafts/master
     pm = push origin HEAD:refs/for/master
     pd = push origin HEAD:refs/for/develop
+    st = status
+    adog = log --all --decorate --one-line --graph
+    co = checkout
 
-[include]
+    br = branch
+    ca = commit --amend
+    can = commit --amend --no-edit
+    ci = commit
+    co = checkout
+    df = diff
+    dc = diff --cached
+    rh = reset --hard origin/master
+
     path = .gitconfig_common
+[branch]
+    # imply tracking
+    autosetupmerge = always
+    # pull --rebase default
+    autosetuprebase = always
+[core]
+    eol = native
+    excludesfile = ~/.gitignore
+[help]
+    # Automatically correct and execute mistyped commands
+    autocorrect = 1
+[init]
+    templatedir = ~/.git_template
+[user]
+    # force user config on a per repo basis if no global user config
+    useconfigonly = true
 
+# vim: sw=4 ts=4 et filetype=gitconfig:
 # vim: sw=4 ts=4 et:

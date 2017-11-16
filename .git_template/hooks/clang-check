@@ -1,7 +1,7 @@
 #!/bin/bash
 
 git diff --cached --name-only --diff-filter=ACMRT \
-    | grep "\.\(h\|hh\|hpp\|c\|cpp\)$" \
+    | ag . --cpp -l \
     | xargs -n 1 clang-format -style=file -fallback-style=None -sort-includes -output-replacements-xml \
     | grep "<replacement " > /dev/null
 
