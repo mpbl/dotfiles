@@ -89,11 +89,9 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 #
 # SolDark colors
-export TERM="xterm-256color"
+export TERM=screen-256color
 if [ -f ~/.dir_colors/dircolors ]
     then eval `dircolors ~/.dir_colors/dircolors`
-else
-    echo "Dircolors could not be loaded, please try reinstalling the solarized colorscheme"
 fi
 
 if [ -f ~/.zsh/aliases ]
