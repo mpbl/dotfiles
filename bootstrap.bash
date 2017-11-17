@@ -90,13 +90,9 @@ function copy_to_home() {
 
 function install_vim_huge_configuration() {
     echo "Installing vim (huge config)"
-    if [ dpkg -s "vim-tiny" ]; then
-        sudo apt-get remove vim-tiny
-    fi
+    sudo apt-get remove vim-tiny
     sudo apt-get install vim-gnome
 }
-
-e
 
 if [ "$1" == "--force" -o "$1" == "-f" ]; then
     copy_to_home;
