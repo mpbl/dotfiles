@@ -11,31 +11,30 @@ function install_fzf() {
 # Install a fuzzy file finder for the command line (https://github.com/junegunn/fzf)
 which fzf > /dev/null
     if [[ $? -eq 1 ]]; then
+        echo "Installing fzf"
         fzf_install_dir="/tmp/fzf"
         mkdir -p $fzf_install_dir
         cd $fzf_install_dir
         git clone --depth 1 https://github.com/junegunn/fzf.git $fzf_install_dir
-        $fzf_install_dir/install
+        $fzf_install_dir/install --all
         cd -
     fi
 }
+
 function install_oh_my_zsh() {
+    echo "Install OhMyZsh"
+    export ZSH=$HOME/.oh-my-zsh
     # install zsh
     # This is the original repository
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-
     # Patch with the fix for the solarized shell
-    if [ -z "$ZSH" ]; then
-        echo '$ZSH was not set, using default value'
-        export ZSH=~/.oh-my-zsh
-    fi
     rm -rf $ZSH
     # Apply my patches for the color config (Probably not necessary everywhere
     git clone https://github.com/FaBrand/oh-my-zsh.git $ZSH
 }
 
 function install_powerline_fonts() {
-    echo "install powerline fonts"
+    echo "Install powerline fonts"
     local POWERLINE_URL="https://github.com/powerline/powerline/raw/develop/font"
     local POWERLINE_SYMBOLS_FILE="PowerlineSymbols.otf"
     local POWERLINE_SYMBOLS_CONF="10-powerline-symbols.conf"
@@ -55,7 +54,7 @@ function install_powerline_fonts() {
 }
 
 function install_solarized_color_scheme() {
-    echo "install solarized color scheme"
+    echo "Install solarized color scheme"
     local DIR="$HOME/.solarized"
     if ! exists dconf; then
         echo "Package dconf-cli required for solarized colors!"
@@ -63,9 +62,7 @@ function install_solarized_color_scheme() {
     elif [ ! -d $DIR ]; then
         echo Install solarized color scheme
         git clone https://github.com/Anthony25/gnome-terminal-colors-solarized.git $DIR
-        cd $DIR
-        ./install.sh --install-dircolors
-        cd -
+        $DIR/install.sh --install-dircolors
     fi
 }
 
@@ -90,6 +87,16 @@ function copy_to_home() {
         -avh --no-perms . ~;
     source ~/.bashrc;
 }
+
+function install_vim_huge_configuration() {
+    echo "Installing vim (huge config)"
+    if [ dpkg -s "vim-tiny" ]; then
+        sudo apt-get remove vim-tiny
+    fi
+    sudo apt-get install vim-gnome
+}
+
+e
 
 if [ "$1" == "--force" -o "$1" == "-f" ]; then
     copy_to_home;
@@ -116,16 +123,17 @@ packages=(
     rsync
     tmux
     tree
-    vim
     xsel
     zsh
     silversearcher-ag
 )
 
+echo "Installing items"
 sudo apt update
 echo ${packages[*]} | xargs sudo apt install --assume-yes
 unset packages;
 
+install_vim_huge_configuration
 install_oh_my_zsh
 install_powerline_fonts
 install_solarized_color_scheme
