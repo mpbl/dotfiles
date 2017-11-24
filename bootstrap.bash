@@ -8,7 +8,8 @@ function exists() {
 }
 
 function setup_catkin_aliases() {
-    if [ -e '~/.config/catkin/verb_aliases/00-default-aliases.yaml' ]; then
+    export CATKIN_ALIASES=$HOME/.config/catkin/verb_aliases/00-default-aliases.yaml
+    if [ -e "$CATKIN_ALIASES" ]; then
         echo 'Copying catkin aliases'
         cp ./catkin_aliases/42-default-aliases.yaml ~/.config/catkin/verb_aliases/
     fi

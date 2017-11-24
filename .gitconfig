@@ -9,7 +9,6 @@
     st = status
     adog = log --all --decorate --one-line --graph
     co = checkout
-
     br = branch
     ca = commit --amend
     can = commit --amend --no-edit
@@ -19,7 +18,6 @@
     dc = diff --cached
     rh = reset --hard origin/master
 
-    path = .gitconfig_common
 [branch]
     # imply tracking
     autosetupmerge = always
