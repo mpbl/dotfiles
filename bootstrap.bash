@@ -20,11 +20,10 @@ function install_fzf() {
 which fzf > /dev/null
     if [[ $? -eq 1 ]]; then
         echo 'Installing fzf'
-        fzf_install_dir='/tmp/fzf'
-        mkdir -p $fzf_install_dir
-        cd $fzf_install_dir
+        fzf_install_dir='~/.fzf'
         git clone --depth 1 https://github.com/junegunn/fzf.git $fzf_install_dir
-        $fzf_install_dir/install --all
+        cd $fzf_install_dir
+        ./install --all
         cd -
     fi
 }
@@ -136,6 +135,7 @@ function install_packages() {
         rsync
         silversearcher-ag
         tmux
+        tmuxinator
         tree
         valgrind
         xsel

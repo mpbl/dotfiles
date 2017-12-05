@@ -11,7 +11,7 @@ bot: b --this --no-deps
 ls: list
 install: config --install
 p: create pkg
-test: build --verbose --make-args test --
+test: build --make-args test --
 t: test
 tt: test --this
 tot: test --this --no-deps
