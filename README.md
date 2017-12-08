@@ -28,7 +28,7 @@ Existing zshrc files will be renamed to zshrc.local if the local file doesn't ex
 The following files are reserved for your private local configuration:
  - `~/.gitconfig`
  - `~/.vimrc.local`
- - `~/.bashrc.local`
+ - `~/.zshrc.local`
 
 If they don't exist, an initial version will be set up.
 Subsequent calls to the bootstrap won't overwrite these files.
