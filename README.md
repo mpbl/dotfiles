@@ -16,15 +16,9 @@ Clone the repository.
 git clone https://github.com/FaBrand/dotfiles
 ```
 
-Run the package install script. It will install some essential packages for my
-dotfiles.
-```bash
-cd dotfiles # enter the repo dir
-./install_packages.bash
-```
-
 Run the bootstrapper script. It will overwrite the dotfiles in your home
 directory, so you should make a backup.
+Existing zshrc files will be renamed to zshrc.local if the local file doesn't exist already
 ```bash
 ./bootstrap.bash
 ```

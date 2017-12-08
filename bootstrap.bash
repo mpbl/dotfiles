@@ -90,6 +90,11 @@ function copy_to_home() {
         cp '.vimrc.local' '~/.vimrc.local'
     fi
 
+    # Move the existing zshrc config to local if it does exist already
+    if [ ! -f ~/.zshrc.local ]; then
+        cp '~/.zshrc' '~/.zshrc.local'
+    fi
+
     rsync --exclude '.git/' \
         --exclude 'bootstrap.bash' \
         --exclude '.gitconfig' \
