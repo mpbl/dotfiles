@@ -40,11 +40,9 @@ Wait until it's done and run (in vim):
 ```vim
 :PlugInstall
 ```
-
-To install YouCompleteMe with semantic support for C++, run:
+During this process Plugged automatically executes the installation of YouCompleteMe
 ```bash
-cd ~/.vim/plugged/youcompleteme   # go to plugin directory
-./install.py --clang-completer    # compile ycm
+./install.py --clang-completer
 ```
 
 ## Feedback

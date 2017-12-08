@@ -139,6 +139,7 @@ function install_packages() {
         python3-dev
         rsync
         silversearcher-ag
+        taskwarrior
         tmux
         tmuxinator
         tree
