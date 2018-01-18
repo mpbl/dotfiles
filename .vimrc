@@ -50,7 +50,7 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     Plug 'rhysd/vim-clang-format', { 'for': 'cpp' }                          " c++ formatting
     Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }                   " File browser sidebar
     Plug 'sirver/ultisnips'                                                  " Code snippets
-    Plug 'honza/vim-snippets'                                                " Code snippets
+    Plug 'FaBrand/vim-snippets'                                                " Code snippets
     Plug 'tpope/vim-commentary'                                              " Code commenting
     Plug 'tpope/vim-fugitive'                                                " Git in Vim!!
     Plug 'tpope/vim-repeat'                                                  " Repeatable tpope commands
@@ -241,6 +241,9 @@ noremap <S-L> gt
 
 " Yank from the cursor to the end of the line, to be consistent with C and D.
 nnoremap Y y$
+
+" When pasting over, keep original contents in register
+vnoremap p "_dP
 
 " Folding with the spacebar
 nnoremap <space> za
