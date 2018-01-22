@@ -114,13 +114,13 @@ function install_vim_huge_configuration() {
     dpkg -s vim-tiny > /dev/null
     if [ ! $? -eq 1 ]; then
         echo 'Removing vim-tiny installation'
-        sudo -s apt-get -qq remove vim-tiny
+        sudo apt-get -qq remove vim-tiny
     fi
 
     dpkg -s vim-gnome > /dev/null
     if [ $? -eq 1 ]; then
         echo 'Installing vim (huge config)'
-        sudo -s apt-get install -qq vim-gnome
+        sudo apt-get install -qq vim-gnome
     else
         echo 'vim gnome already installed'
     fi
@@ -153,10 +153,10 @@ function install_packages() {
     )
 
     echo 'Performing apt-get update'
-    sudo -s apt-get -qq update
+    sudo apt-get -qq update
 
     echo "Installing items"
-    echo ${packages[*]} | xargs sudo -s apt install --assume-yes
+    echo ${packages[*]} | xargs sudo apt install --assume-yes
 }
 
 
