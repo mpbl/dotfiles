@@ -13,11 +13,10 @@ function setup_catkin_aliases() {
 }
 
 function install_fzf() {
-# Install a fuzzy file finder for the command line (https://github.com/junegunn/fzf)
-which fzf > /dev/null
-    if [[ $? -eq 1 ]]; then
+    # Install a fuzzy file finder for the command line (https://github.com/junegunn/fzf)
+    fzf_install_dir=~/.fzf
+    if [ ! -e "$fzf_install_dir" ]; then
         echo 'Installing fzf'
-        fzf_install_dir=~/.fzf
         git clone --depth 1 https://github.com/junegunn/fzf.git $fzf_install_dir
         cd $fzf_install_dir
         ./install --all
@@ -48,14 +47,14 @@ function install_powerline_fonts() {
     local POWERLINE_SYMBOLS_FILE='PowerlineSymbols.otf'
     local POWERLINE_SYMBOLS_CONF='10-powerline-symbols.conf'
 
-    if [[ ! -e ~/.fonts/$POWERLINE_SYMBOLS_FILE ]]; then
+    if [ ! -e ~/.fonts/$POWERLINE_SYMBOLS_FILE ]; then
         curl -fsSL $POWERLINE_URL/$POWERLINE_SYMBOLS_FILE -o /tmp/$POWERLINE_SYMBOLS_FILE
         mkdir ~/.fonts 2> /dev/null
         mv /tmp/$POWERLINE_SYMBOLS_FILE ~/.fonts/$POWERLINE_SYMBOLS_FILE
         fc-cache -vf ~/.fonts/
     fi
 
-    if [[ ! -e ~/.config/fontconfig/conf.d/$POWERLINE_SYMBOLS_CONF ]]; then
+    if [ ! -e ~/.config/fontconfig/conf.d/$POWERLINE_SYMBOLS_CONF ]; then
         curl -fsSL $POWERLINE_URL/$POWERLINE_SYMBOLS_CONF -o /tmp/$POWERLINE_SYMBOLS_CONF
         mkdir -p ~/.config/fontconfig/conf.d 2> /dev/null
         mv /tmp/$POWERLINE_SYMBOLS_CONF ~/.config/fontconfig/conf.d/$POWERLINE_SYMBOLS_CONF
@@ -81,7 +80,7 @@ function install_solarized_color_scheme() {
 function copy_to_home() {
     read -p "Do you want to copy the dotfiles to your home reposory? (This may overwrite some files) Are you sure? (y/n) " -n 1;
     echo "";
-    if [[ $REPLY =~ ^[Yy]$ ]]; then
+    if [ $REPLY =~ ^[Yy]$ ]; then
 
         # never overwrite existing .gitconfig
         if [ ! -f ~/.gitconfig ]; then
