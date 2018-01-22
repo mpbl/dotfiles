@@ -29,15 +29,13 @@ function install_oh_my_zsh() {
 
     if [ ! -e "$ZSH" ]; then
         echo 'Install OhMyZsh'
-        # install zsh
-        # This is the original repository
-        sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-        # Patch with the fix for the solarized shell
-        rm -rf $ZSH
-        # Apply my patches for the color config (Probably not necessary everywhere
-        git clone https://github.com/FaBrand/oh-my-zsh.git $ZSH
+        # Install my customized oh-my-zsh version
+        sh -c "$(curl -fsSL https://raw.githubusercontent.com/FaBrand/oh-my-zsh/master/tools/install.sh)"
     else
-        echo 'OhMyZsh already installed'
+        echo 'OhMyZsh already installed - updating config'
+        cd $ZSH
+        git pull
+        cd -
     fi
 }
 
