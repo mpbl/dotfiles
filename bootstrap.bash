@@ -80,7 +80,7 @@ function install_solarized_color_scheme() {
 function copy_to_home() {
     read -p "Do you want to copy the dotfiles to your home reposory? (This may overwrite some files) Are you sure? (y/n) " -n 1;
     echo "";
-    if [ $REPLY =~ ^[Yy]$ ]; then
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
 
         # never overwrite existing .gitconfig
         if [ ! -f ~/.gitconfig ]; then
