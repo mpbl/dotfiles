@@ -18,7 +18,7 @@ git clone https://github.com/FaBrand/dotfiles
 
 Run the bootstrapper script. It will overwrite the dotfiles in your home
 directory, so you should make a backup.
-Existing zshrc files will be renamed to zshrc.local if the local file doesn't exist already
+The bootstrap script also installs a customized fork of the oh-my-zsh theme with some plugins being activated by default
 ```bash
 ./bootstrap.bash
 ```
@@ -33,17 +33,8 @@ The following files are reserved for your private local configuration:
 If they don't exist, an initial version will be set up.
 Subsequent calls to the bootstrap won't overwrite these files.
 
-## Finalize vim
-
-On the first time you start vim, it will install plug.vim and ubuntu mono powerline fonts.
-Wait until it's done and run (in vim):
-```vim
-:PlugInstall
-```
-During this process Plugged automatically executes the installation of YouCompleteMe
-```bash
-./install.py --clang-completer
-```
+## MISC
+I like to use the [arc-theme](https://github.com/horst3180/arc-theme) alongside the solarized dark colorscheme.
 
 ## Feedback
 
