@@ -1,7 +1,4 @@
 #!/bin/bash
-cd "$(dirname "${BASH_SOURCE}")";
-
-git pull origin master;
 
 function exists() {
   command -v $1 >/dev/null 2>&1
@@ -20,7 +17,7 @@ function install_fzf() {
 which fzf > /dev/null
     if [[ $? -eq 1 ]]; then
         echo 'Installing fzf'
-        fzf_install_dir='~/.fzf'
+        fzf_install_dir=~/.fzf
         git clone --depth 1 https://github.com/junegunn/fzf.git $fzf_install_dir
         cd $fzf_install_dir
         ./install --all
@@ -66,11 +63,12 @@ function install_powerline_fonts() {
 }
 
 function install_solarized_color_scheme() {
-    local DIR="$HOME/.solarized"
+    local DIR=~/.solarized
     if ! exists dconf; then
         echo 'Package dconf-cli required for solarized colors!'
         return -1
     elif [ ! -d $DIR ]; then
+        read "Have you already defined a new profile in your Terminal preferences e.g. 'SolDark'? If not add it now and continue by pressing the return key..."
         echo Install solarized color scheme
         git clone https://github.com/Anthony25/gnome-terminal-colors-solarized.git $DIR
         $DIR/install.sh --install-dircolors
@@ -80,29 +78,34 @@ function install_solarized_color_scheme() {
 }
 
 function copy_to_home() {
-    # never overwrite existing .gitconfig
-    if [ ! -f ~/.gitconfig ]; then
-        cp '.gitconfig' '~/.gitconfig'
-    fi
+    read -p "Do you want to copy the dotfiles to your home reposory? (This may overwrite some files) Are you sure? (y/n) " -n 1;
+    echo "";
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
 
-    # never overwrite existing .vimrc.local
-    if [ ! -f ~/.vimrc.local ]; then
-        cp '.vimrc.local' '~/.vimrc.local'
-    fi
+        # never overwrite existing .gitconfig
+        if [ ! -f ~/.gitconfig ]; then
+            cp .gitconfig ~/.gitconfig
+        fi
 
-    # Move the existing zshrc config to local if it does exist already
-    if [ ! -f ~/.zshrc.local ]; then
-        cp '~/.zshrc' '~/.zshrc.local'
-    fi
+        # never overwrite existing .vimrc.local
+        if [ ! -f ~/.vimrc.local ]; then
+            cp .vimrc.local ~/.vimrc.local
+        fi
 
-    rsync --exclude '.git/' \
-        --exclude 'bootstrap.bash' \
-        --exclude '.gitconfig' \
-        --exclude '.vimrc.local' \
-        --exclude 'README.md' \
-        --exclude 'catkin_aliases/*' \
-        -avh --no-perms . ~;
-    source ~/.zshrc;
+        # Backup a possibly existing zshrc file
+        if [ -f ~/.zshrc ]; then
+            echo "Created backup file from existing zshrc file"
+            cp ~/.zshrc ~/backup.zshrc
+        fi
+
+        rsync --exclude '.git/' \
+            --exclude 'bootstrap.bash' \
+            --exclude '.gitconfig' \
+            --exclude '.vimrc.local' \
+            --exclude 'README.md' \
+            --exclude 'catkin_aliases/*' \
+            -avh --no-perms . ~;
+    fi
 }
 
 function install_vim_huge_configuration() {
@@ -156,23 +159,15 @@ function install_packages() {
 }
 
 
-# Prepare workspace files
-if [ "$1" == "--force" -o "$1" == "-f" ]; then
-    copy_to_home;
-else
-    read -p "This may overwrite existing files in your home directory. Are you sure? (y/n) " -n 1;
-    echo "";
-    if [[ $REPLY =~ ^[Yy]$ ]]; then
-        copy_to_home;
-    fi;
-fi;
-unset copy_to_home;
+function install_full() {
+    copy_to_home
+    install_packages
+    install_oh_my_zsh
+    install_vim_huge_configuration
+    install_powerline_fonts
+    install_solarized_color_scheme
+    install_fzf
+    setup_catkin_aliases
+}
 
-install_packages
-install_vim_huge_configuration
-install_oh_my_zsh
-install_powerline_fonts
-install_solarized_color_scheme
-install_fzf
-setup_catkin_aliases
-
+install_full
