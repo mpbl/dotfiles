@@ -5,9 +5,9 @@
     # for gerrit only
     pdm = push origin HEAD:refs/drafts/master
     pm = push origin HEAD:refs/for/master
-    pd = push origin HEAD:refs/for/develop
+    p = push origin HEAD:refs/heads/master
     st = status
-    adog = log --all --decorate --one-line --graph
+    adog = log --all --decorate --oneline --graph
     co = checkout
     br = branch
     ca = commit --amend
