@@ -57,7 +57,7 @@ setopt RM_STAR_WAIT
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(tmux)
+plugins=(tmux vi-mode docker repo)
 
 source $ZSH/oh-my-zsh.sh
 
