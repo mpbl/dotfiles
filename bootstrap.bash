@@ -68,10 +68,11 @@ function install_solarized_color_scheme() {
         echo 'Package dconf-cli required for solarized colors!'
         return -1
     elif [ ! -d $DIR ]; then
-        read "Have you already defined a new profile in your Terminal preferences e.g. 'SolDark'? If not add it now and continue by pressing the return key..."
+        read -p "Have you already defined a new profile in your Terminal preferences e.g. 'SolDark'? If not add it now and continue by pressing the return key..."
         echo Install solarized color scheme
         git clone https://github.com/Anthony25/gnome-terminal-colors-solarized.git $DIR
-        $DIR/install.sh --install-dircolors
+        cd ~/ && $DIR/install.sh --install-dircolors
+        cd -
     else
         echo 'Solarized theme already installed'
     fi
@@ -113,13 +114,13 @@ function install_vim_huge_configuration() {
     dpkg -s vim-tiny > /dev/null
     if [ ! $? -eq 1 ]; then
         echo 'Removing vim-tiny installation'
-        sudo apt-get -qq remove vim-tiny
+        sudo -s apt-get -qq remove vim-tiny
     fi
 
     dpkg -s vim-gnome > /dev/null
     if [ $? -eq 1 ]; then
         echo 'Installing vim (huge config)'
-        sudo apt-get install -qq vim-gnome
+        sudo -s apt-get install -qq vim-gnome
     else
         echo 'vim gnome already installed'
     fi
@@ -152,10 +153,10 @@ function install_packages() {
     )
 
     echo 'Performing apt-get update'
-    sudo apt-get -qq update
+    sudo -s apt-get -qq update
 
     echo "Installing items"
-    echo ${packages[*]} | xargs sudo apt install --assume-yes
+    echo ${packages[*]} | xargs sudo -s apt install --assume-yes
 }
 
 
