@@ -122,7 +122,7 @@ function install_vim_configuration() {
         echo 'vim gnome already installed'
     fi
 
-    vim +PlugInstall +qall
+    vim +PlugClean +PlugInstall +qall
 }
 
 function install_packages() {
