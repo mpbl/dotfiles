@@ -65,6 +65,7 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     Plug 'chenzhiwo/ycm-extra-conf-ros'                                      " Ros Config for ycm
     Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
     Plug 'vim-syntastic/syntastic'                                           " Clang Tidy etc
+    Plug 'tikhomirov/vim-glsl'                                               " Syntax highlighting for glsl
     call plug#end()
 endif
 " }
@@ -192,7 +193,7 @@ set matchpairs+=<:>             " Match, to be used with %
 set pastetoggle=<F12>           " pastetoggle (sane indentation on pastes)
 " Remove trailing whitespaces and ^M chars
 augroup stripWHITESPACE
-    autocmd FileType c,cpp,python,xml,yml,cmake,sh,bash,py,gitcommit,yaml autocmd BufWritePre <buffer> call StripTrailingWhitespace()
+    autocmd FileType c,cpp,python,xml,yml,cmake,sh,bash,py,gitcommit,yaml,glsl autocmd BufWritePre <buffer> call StripTrailingWhitespace()
 augroup END
 let python_highlight_all = 1
 " }
@@ -504,6 +505,11 @@ if isdirectory(expand("~/.vim/plugged/syntastic/"))
 endif
 " }
 
+" { Glsl
+if isdirectory(expand("~/.vim/plugged/vim-glsl/"))
+    autocmd! BufNewFile,BufRead *.vs,*.fs,*.*shader set ft=glsl
+endif
+" }
 " }
 
 " GVim Settings {
