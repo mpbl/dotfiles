@@ -108,7 +108,7 @@ function copy_to_home() {
     fi
 }
 
-function install_vim_huge_configuration() {
+function install_vim_configuration() {
     # Check vim installation and perform changes if necessary
     dpkg -s vim-tiny > /dev/null
     if [ ! $? -eq 1 ]; then
@@ -123,6 +123,8 @@ function install_vim_huge_configuration() {
     else
         echo 'vim gnome already installed'
     fi
+
+    vim +PlugInstall +qall
 }
 
 function install_packages() {
@@ -162,10 +164,10 @@ function install_packages() {
 function install_full() {
     copy_to_home
     install_packages
-    install_oh_my_zsh
-    install_vim_huge_configuration
     install_powerline_fonts
     install_solarized_color_scheme
+    install_oh_my_zsh
+    install_vim_configuration
     install_fzf
     setup_catkin_aliases
 }
