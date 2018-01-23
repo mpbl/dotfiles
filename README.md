@@ -22,6 +22,17 @@ The bootstrap script also installs a customized fork of the oh-my-zsh theme with
 ```bash
 ./bootstrap.bash
 ```
+## Known Problems
+
+On some setups it appears that the install of oh-my-zsh can't wasn't successfull.
+e.g. The two-lined bira theme is not used.
+
+Try changing the defult shell like this:
+```bash
+chsh -s $(which zsh)
+```
+Open the link if this error ocurs [PAM authentication Error](https://www.google.de/search?q=ubuntu+chsh+pam+authentication+failure).
+
 
 ## Add your private configuration
 
