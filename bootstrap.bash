@@ -137,7 +137,9 @@ function install_packages() {
         dconf-cli
         exuberant-ctags
         git
+        htop
         meld
+        nmon
         python-dev
         python3-dev
         rsync
