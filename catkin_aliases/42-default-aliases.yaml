@@ -6,6 +6,7 @@
 ### Files in this folder which end with `.yaml` are evaluated in sorted order
 
 b: build
+ba: catkin build -c -s --catkin-make-args all tests --
 bt: b --this
 bot: b --this --no-deps
 ls: list
