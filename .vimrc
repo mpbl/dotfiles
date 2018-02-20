@@ -486,6 +486,7 @@ endif
 " Clang Format {
 if isdirectory(expand("~/.vim/plugged/vim-clang-format/"))
     let g:clang_format#detect_style_file = 1
+    let g:clang_format#command = 'clang-format-5.0'
 
     augroup clangFMT
         autocmd FileType cpp let g:clang_format#auto_format = 1
