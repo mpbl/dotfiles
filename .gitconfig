@@ -3,6 +3,7 @@
     helper = store
 [alias]
     # for gerrit only
+    prr = pull --rebase
     pdm = push origin HEAD:refs/drafts/master
     pm = push origin HEAD:refs/for/master
     p = push origin HEAD:refs/heads/master

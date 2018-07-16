@@ -118,11 +118,12 @@ function install_vim_configuration() {
     if [ $? -eq 1 ]; then
         echo 'Installing vim (huge config)'
         sudo apt-get install -qq vim-gnome
+        vim +PlugClean +PlugInstall +PlugUpdate +PlugUpgrade +qall
     else
-        echo 'vim gnome already installed'
+        echo 'vim gnome already installed. Updating vim'
+        vim +PlugClean +PlugUpdate +PlugUpgrade +qall
     fi
 
-    vim +PlugClean +PlugInstall +qall
 }
 
 function install_packages() {
@@ -151,6 +152,7 @@ function install_packages() {
         valgrind
         xsel
         zsh
+        source-highlight
     )
 
     echo 'Performing apt-get update'
