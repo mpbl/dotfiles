@@ -42,26 +42,26 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     call plug#begin('~/.vim/plugged')
     Plug 'altercation/vim-colors-solarized'                                  " Colorscheme
     Plug 'christoomey/vim-tmux-navigator'                                    " Seamless vim and tmux split navigation
-    Plug 'ctrlpvim/ctrlp.vim'                                                " Fuzzy file opener
-    Plug 'easymotion/vim-easymotion'                                         " Speed of light motion
+"   Plug 'ctrlpvim/ctrlp.vim'                                                " Fuzzy file opener
+"    Plug 'easymotion/vim-easymotion'                                         " Speed of light motion
     Plug 'majutsushi/tagbar'                                                 " Tags in sidebar
-    Plug 'mbbill/undotree'                                                   " Undo sidebar
-    Plug 'michaeljsmith/vim-indent-object'                                   " Indent object
+"    Plug 'mbbill/undotree'                                                   " Undo sidebar
+"    Plug 'michaeljsmith/vim-indent-object'                                   " Indent object
     Plug 'rhysd/vim-clang-format', { 'for': 'cpp' }                          " c++ formatting
     Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }                   " File browser sidebar
     Plug 'sirver/ultisnips'                                                  " Code snippets
     Plug 'FaBrand/vim-snippets'                                                " Code snippets
     Plug 'tpope/vim-commentary'                                              " Code commenting
     Plug 'tpope/vim-fugitive'                                                " Git in Vim!!
-    Plug 'tpope/vim-repeat'                                                  " Repeatable tpope commands
-    Plug 'tpope/vim-surround'                                                " Parenthesis commands
-    Plug 'tpope/vim-unimpaired'                                              " Pairs of handy bracket mappings
+"    Plug 'tpope/vim-repeat'                                                  " Repeatable tpope commands
+"    Plug 'tpope/vim-surround'                                                " Parenthesis commands
+"    Plug 'tpope/vim-unimpaired'                                              " Pairs of handy bracket mappings
     Plug 'valloric/youcompleteme', {'do' : './install.py --clang-completer'} " Code completion engine!!
     Plug 'vim-airline/vim-airline'                                           " Statusline
     Plug 'vim-airline/vim-airline-themes'                                    " Solarized theme for airline
-    Plug 'vim-scripts/argtextobj.vim'                                        " Argument object
-    Plug 'vim-scripts/matchit.zip'                                           " Improve % operation
-    Plug 'godlygeek/tabular'                                                 " Text alignment
+"    Plug 'vim-scripts/argtextobj.vim'                                        " Argument object
+"    Plug 'vim-scripts/matchit.zip'                                           " Improve % operation
+"    Plug 'godlygeek/tabular'                                                 " Text alignment
     Plug 'chenzhiwo/ycm-extra-conf-ros'                                      " Ros Config for ycm
     Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
     Plug 'vim-syntastic/syntastic'                                           " Clang Tidy etc
