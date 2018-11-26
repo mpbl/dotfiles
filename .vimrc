@@ -61,7 +61,7 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     Plug 'vim-airline/vim-airline-themes'                                    " Solarized theme for airline
 "    Plug 'vim-scripts/argtextobj.vim'                                        " Argument object
 "    Plug 'vim-scripts/matchit.zip'                                           " Improve % operation
-"    Plug 'godlygeek/tabular'                                                 " Text alignment
+    Plug 'godlygeek/tabular'                                                 " Text alignment
     Plug 'chenzhiwo/ycm-extra-conf-ros'                                      " Ros Config for ycm
     Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
     Plug 'vim-syntastic/syntastic'                                           " Clang Tidy etc
