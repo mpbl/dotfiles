@@ -4,14 +4,6 @@ function exists() {
   command -v $1 >/dev/null 2>&1
 }
 
-function setup_catkin_aliases() {
-    export CATKIN_ALIASES=$HOME/.config/catkin/verb_aliases/00-default-aliases.yaml
-    if [ -e "$CATKIN_ALIASES" ]; then
-        echo 'Copying catkin aliases'
-        cp ./catkin_aliases/42-default-aliases.yaml ~/.config/catkin/verb_aliases/
-    fi
-}
-
 function install_fzf() {
     # Install a fuzzy file finder for the command line (https://github.com/junegunn/fzf)
     fzf_install_dir=~/.fzf
@@ -30,7 +22,7 @@ function install_oh_my_zsh() {
     if [ ! -e "$ZSH" ]; then
         echo 'Install OhMyZsh'
         # Install my customized oh-my-zsh version
-        sh -c "$(curl -fsSL https://raw.githubusercontent.com/FaBrand/oh-my-zsh/master/tools/install.sh)"
+	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
     else
         echo 'OhMyZsh already installed - updating config'
         cd $ZSH
@@ -172,11 +164,10 @@ function install_full() {
     copy_to_home
     install_packages
     install_powerline_fonts
-    install_solarized_color_scheme
+    # install_solarized_color_scheme
     install_oh_my_zsh
     install_vim_configuration
     install_fzf
-    setup_catkin_aliases
     # install_arc_theme
 }
 
